@@ -4,51 +4,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etCorreo, etContraseña;
+    private EditText etCorreo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Vinculación con los elementos del layout
         etCorreo = findViewById(R.id.etCorreo);
-        etContraseña = findViewById(R.id.etContraseña);
-    }
 
-    // Método para el botón "Iniciar Sesión"
-    public void Login(View view) {
-        String correo = etCorreo.getText().toString().trim();
-        String contraseña = etContraseña.getText().toString().trim();
 
-        // Validación básica
-        if (correo.isEmpty() || contraseña.isEmpty()) {
-            Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
-            return;
+        String nombre = getIntent().getStringExtra("nombre_usuario");
+        String correo = getIntent().getStringExtra("correo_usuario");
+
+        if (correo != null) {
+            etCorreo.setText(correo);
         }
-
-        // Aquí solo simulamos el login (aún sin Firebase)
-        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-        // Ir a la pantalla principal
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
-    // Método para el botón "Registrarse"
-    public void Registrarse(View view) {
+    public void irARegistro(View view) {
         Intent intent = new Intent(this, RegistroActivity.class);
         startActivity(intent);
     }
+
+    public void iniciarSesion(View view) {
+        // Aquí podrías validar correo y contraseña
+        Intent intent = new Intent(this, MainActivity.class); // o cualquier otra Activity destino
+        startActivity(intent);
+    }
+
+
 }
