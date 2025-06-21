@@ -1,24 +1,34 @@
 package udh.edu.pe.gestiondecompras;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class NuevaListaActivity extends AppCompatActivity {
+
+    private EditText etNombre, etFecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_nueva_lista);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        etNombre = findViewById(R.id.etNombre);
+        etFecha = findViewById(R.id.Fecha);
+    }
+
+    public void guardarLista(View view) {
+        String nombreLista = etNombre.getText().toString().trim();
+        String fecha = etFecha.getText().toString().trim();
+
+        if (nombreLista.isEmpty() || fecha.isEmpty()) {
+            Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+        } else {
+
+            Toast.makeText(this, "Lista guardada:\n" + nombreLista + "\nFecha: " + fecha, Toast.LENGTH_LONG).show();
+        }
     }
 }
