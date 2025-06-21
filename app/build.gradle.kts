@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "udh.edu.pe.gestiondecompras"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "udh.edu.pe.gestiondecompras"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
