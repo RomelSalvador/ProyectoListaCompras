@@ -1,33 +1,40 @@
 package udh.edu.pe.gestiondecompras;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    Button botonGuardar;
+    private EditText etNombres, etApellido, etCorreo, etContraseña;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registro);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        botonGuardar = findViewById(R.id.Guardar);
-        botonGuardar.setOnClickListener(v ->){
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-        };
+
+        // Referenciando los campos del layout
+        etNombres = findViewById(R.id.etNombres);
+        etApellido = findViewById(R.id.etApellido);
+        etCorreo = findViewById(R.id.etCorreo);
+        etContraseña = findViewById(R.id.etContraseña);
+    }
+
+    // Método que se ejecuta al presionar el botón "Guardar"
+    public void Guardar(View view) {
+        String nombres = etNombres.getText().toString().trim();
+        String apellido = etApellido.getText().toString().trim();
+        String correo = etCorreo.getText().toString().trim();
+        String contraseña = etContraseña.getText().toString().trim();
+
+        if (nombres.isEmpty() || apellido.isEmpty() || correo.isEmpty() || contraseña.isEmpty()) {
+            Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+        } else {
+
+            Toast.makeText(this, "Registro exitoso:\n" + nombres + " " + apellido, Toast.LENGTH_LONG).show();
+        }
     }
 }

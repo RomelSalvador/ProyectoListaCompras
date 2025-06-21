@@ -1,36 +1,35 @@
 package udh.edu.pe.gestiondecompras;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-
-import androidx.activity.EdgeToEdge;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 
-    Button botonGuardar;
+    private EditText etNombre, etCantidad, etAdquirido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_agregar_producto);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        botonGuardar = findViewById(R.id.Guardar);
-        botonGuardar.setOnClickListener(v ->){
-            Intent intent = new Intent(MainActivity.this);
-            startActivity(intent);
-        };
+        etNombre = findViewById(R.id.etNombre);
+        etCantidad = findViewById(R.id.etCantidad);
+        etAdquirido = findViewById(R.id.etAdquirido);
+    }
 
+    public void guardarProducto(View view) {
+        String nombre = etNombre.getText().toString().trim();
+        String cantidad = etCantidad.getText().toString().trim();
+        String adquirido = etAdquirido.getText().toString().trim();
 
+        if (nombre.isEmpty() || cantidad.isEmpty() || adquirido.isEmpty()) {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Producto guardado correctamente", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
