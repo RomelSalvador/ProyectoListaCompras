@@ -24,7 +24,6 @@ public class ListaProductosActivity extends AppCompatActivity {
         recyclerViewProductos = findViewById(R.id.recyclerViewProductos);
         recyclerViewProductos.setLayoutManager(new LinearLayoutManager(this));
 
-
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("nombre") && intent.hasExtra("cantidad") && intent.hasExtra("poster")) {
             String nombre = intent.getStringExtra("nombre");
