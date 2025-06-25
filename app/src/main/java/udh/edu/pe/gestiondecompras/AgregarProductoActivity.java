@@ -32,6 +32,7 @@ public class AgregarProductoActivity extends AppCompatActivity {
             int cantidad = Integer.parseInt(cantidadStr);
 
 
+
             Intent intent = new Intent(this, ListaProductosActivity.class);
             intent.putExtra("nombre", nombre);
             intent.putExtra("cantidad", cantidad);
