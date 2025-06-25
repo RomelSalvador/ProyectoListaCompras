@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,16 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         Drawable imagen = context.getResources().getDrawable(producto.getPoster());
         holder.imageViewPoster.setImageDrawable(imagen);
+
+
+        holder.checkBoxAdquirido.setOnCheckedChangeListener(null); // evita efecto rebote
+        holder.checkBoxAdquirido.setChecked(producto.isAdquirido());
+
+        holder.checkBoxAdquirido.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            producto.setAdquirido(isChecked);
+            Toast.makeText(context, "Estado actualizado: " + producto.getNombre() +
+                    (isChecked ? " (Adquirido)" : " (Pendiente)"), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -48,12 +60,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         return listaProductos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageViewPoster;
         TextView textViewNombre;
         TextView textViewCantidad;
         TextView textViewCategoria;
+        CheckBox checkBoxAdquirido;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,14 +74,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             textViewNombre = itemView.findViewById(R.id.tvNombreProducto);
             textViewCantidad = itemView.findViewById(R.id.tvCantidad);
             textViewCategoria = itemView.findViewById(R.id.tvCategoria);
-
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            Producto producto = listaProductos.get(getAdapterPosition());
-            Toast.makeText(context, "Producto: " + producto.getNombre(), Toast.LENGTH_SHORT).show();
+            checkBoxAdquirido = itemView.findViewById(R.id.checkBoxAdquirido);
         }
     }
 }

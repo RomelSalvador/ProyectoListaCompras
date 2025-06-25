@@ -1,24 +1,51 @@
 package udh.edu.pe.gestiondecompras;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class PrincipalActivity extends AppCompatActivity {
+
+    private Button btnAgregarLista, btnAgregarProducto, btnListaProductos, btnListaCompras;
+    private TextView tvBienvenida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_principal);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        tvBienvenida = findViewById(R.id.tvBienvenida);
+        btnAgregarLista = findViewById(R.id.btnAgregarLista);
+        btnAgregarProducto = findViewById(R.id.btnAgregarProducto);
+        btnListaProductos = findViewById(R.id.btnListaProductos);
+        btnListaCompras = findViewById(R.id.btnListaCompras);
+
+        // Mensaje de bienvenida
+        tvBienvenida.setText("¡Bienvenidos a la Gestión de Listas de Compras!");
+
+        // Navegaciones
+        btnAgregarLista.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AgregarListaComprasActivity.class);
+            startActivity(intent);
+        });
+
+        btnAgregarProducto.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AgregarProductoActivity.class);
+            startActivity(intent);
+        });
+
+        btnListaProductos.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ListaProductosActivity.class);
+            startActivity(intent);
+        });
+
+        btnListaCompras.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DetalleListaActivity.class);
+            startActivity(intent);
         });
     }
 }
