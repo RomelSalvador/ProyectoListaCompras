@@ -29,8 +29,9 @@ public class ListaProductosActivity extends AppCompatActivity {
             String nombre = intent.getStringExtra("nombre");
             int cantidad = intent.getIntExtra("cantidad", 0);
             int poster = intent.getIntExtra("poster", R.drawable.ic_launcher_foreground);
+            String categoria = intent.getStringExtra("categoria");
 
-            Producto producto = new Producto(nombre, cantidad, poster);
+            Producto producto = new Producto(nombre, cantidad, poster,categoria);
             listaProductos.add(producto);
         }
 

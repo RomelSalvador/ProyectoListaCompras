@@ -4,11 +4,13 @@ public class Producto {
     private String nombre;
     private int cantidad;
     private int poster;
+    private String categoria;
 
-    public Producto(String nombre, int cantidad, int poster) {
+    public Producto(String nombre, int cantidad, int poster, String categoria) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.poster = poster;
+        this.categoria = categoria;
     }
 
     public String getNombre() {
@@ -19,6 +21,14 @@ public class Producto {
         this.nombre = nombre;
     }
 
+    public int getPoster() {
+        return poster;
+    }
+
+    public void setPoster(int poster) {
+        this.poster = poster;
+    }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -27,11 +37,11 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public int getPoster() {
-        return poster;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setPoster(int poster) {
-        this.poster = poster;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

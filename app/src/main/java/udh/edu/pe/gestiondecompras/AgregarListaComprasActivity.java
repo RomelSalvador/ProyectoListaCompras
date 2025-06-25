@@ -7,14 +7,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NuevaListaActivity extends AppCompatActivity {
+public class AgregarListaComprasActivity extends AppCompatActivity {
 
     private EditText etNombre, etFecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nueva_lista);
+        setContentView(R.layout.activity_agregar_lista_compras);
 
         etNombre = findViewById(R.id.etNombre);
         etFecha = findViewById(R.id.Fecha);

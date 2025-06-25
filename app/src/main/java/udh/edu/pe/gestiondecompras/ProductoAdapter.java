@@ -37,6 +37,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         holder.textViewNombre.setText(producto.getNombre());
         holder.textViewCantidad.setText("Cantidad: " + producto.getCantidad());
+        holder.textViewCategoria.setText("Categoría: " + producto.getCategoria());
 
         Drawable imagen = context.getResources().getDrawable(producto.getPoster());
         holder.imageViewPoster.setImageDrawable(imagen);
@@ -52,12 +53,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         ImageView imageViewPoster;
         TextView textViewNombre;
         TextView textViewCantidad;
+        TextView textViewCategoria;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewPoster = itemView.findViewById(R.id.ivPoster);
             textViewNombre = itemView.findViewById(R.id.tvNombreProducto);
             textViewCantidad = itemView.findViewById(R.id.tvCantidad);
+            textViewCategoria = itemView.findViewById(R.id.tvCategoria);
 
             itemView.setOnClickListener(this);
         }
