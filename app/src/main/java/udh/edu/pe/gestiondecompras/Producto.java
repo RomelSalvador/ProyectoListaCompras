@@ -6,11 +6,14 @@ public class Producto {
     private int poster;
     private String categoria;
 
+    private boolean adquirido;
+
     public Producto(String nombre, int cantidad, int poster, String categoria) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.poster = poster;
         this.categoria = categoria;
+        this.adquirido = false;
     }
 
     public String getNombre() {
@@ -43,5 +46,13 @@ public class Producto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean isAdquirido() {
+        return adquirido;
+    }
+
+    public void setAdquirido(boolean adquirido) {
+        this.adquirido = adquirido;
     }
 }

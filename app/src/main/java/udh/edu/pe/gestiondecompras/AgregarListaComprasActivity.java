@@ -1,5 +1,6 @@
 package udh.edu.pe.gestiondecompras;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -7,28 +8,35 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class AgregarListaComprasActivity extends AppCompatActivity {
 
-    private EditText etNombre, etFecha;
+    private EditText etNombreLista, etFechaLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_lista_compras);
 
-        etNombre = findViewById(R.id.etNombre);
-        etFecha = findViewById(R.id.Fecha);
+        etNombreLista = findViewById(R.id.etNombreLista);
+        etFechaLista = findViewById(R.id.etFechaLista);
     }
 
     public void guardarLista(View view) {
-        String nombreLista = etNombre.getText().toString().trim();
-        String fecha = etFecha.getText().toString().trim();
+        String nombre = etNombreLista.getText().toString().trim();
+        String fecha = etFechaLista.getText().toString().trim();
 
-        if (nombreLista.isEmpty() || fecha.isEmpty()) {
-            Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+        if (nombre.isEmpty() || fecha.isEmpty()) {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
         } else {
 
-            Toast.makeText(this, "Lista guardada:\n" + nombreLista + "\nFecha: " + fecha, Toast.LENGTH_LONG).show();
+            Lista nuevaLista = new Lista(nombre, fecha, new ArrayList<>());
+
+            Intent intent = new Intent(this, AgregarListaComprasActivity.class);
+            intent.putExtra("nombre", nombre);
+            intent.putExtra("fecha", fecha);
+            startActivity(intent);
         }
     }
 }
