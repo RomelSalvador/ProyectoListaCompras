@@ -24,10 +24,10 @@ public class PrincipalActivity extends AppCompatActivity {
         btnListaProductos = findViewById(R.id.btnListaProductos);
         btnListaCompras = findViewById(R.id.btnListaCompras);
 
-        // Mensaje de bienvenida
-        tvBienvenida.setText("¡Bienvenidos a la Gestión de Listas de Compras!");
 
-        // Navegaciones
+        tvBienvenida.setText("Gestión de Listas de Compras");
+
+
         btnAgregarLista.setOnClickListener(v -> {
             Intent intent = new Intent(this, AgregarListaComprasActivity.class);
             startActivity(intent);

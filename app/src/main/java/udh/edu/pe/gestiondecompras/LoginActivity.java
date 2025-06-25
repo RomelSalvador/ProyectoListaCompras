@@ -18,9 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         etCorreo = findViewById(R.id.etCorreo);
 
 
-        String nombre = getIntent().getStringExtra("nombre_usuario");
         String correo = getIntent().getStringExtra("correo_usuario");
-
         if (correo != null) {
             etCorreo.setText(correo);
         }
@@ -32,10 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void iniciarSesion(View view) {
-        // Aquí podrías validar correo y contraseña
-        Intent intent = new Intent(this, MainActivity.class); // o cualquier otra Activity destino
+
+        Intent intent = new Intent(this, PrincipalActivity.class);
         startActivity(intent);
+        finish();
     }
-
-
 }
