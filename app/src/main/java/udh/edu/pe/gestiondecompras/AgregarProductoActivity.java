@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class AgregarProductoActivity extends AppCompatActivity {
 
     private EditText etNombre, etCantidad;
@@ -32,13 +30,12 @@ public class AgregarProductoActivity extends AppCompatActivity {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
         } else {
             int cantidad = Integer.parseInt(cantidadStr);
-            Producto producto = new Producto(nombre, cantidad, imagenSeleccionada);
 
-            ArrayList<Producto> lista = new ArrayList<>();
-            lista.add(producto);
 
             Intent intent = new Intent(this, ListaProductosActivity.class);
-            intent.putExtra("lista", lista);
+            intent.putExtra("nombre", nombre);
+            intent.putExtra("cantidad", cantidad);
+            intent.putExtra("poster", imagenSeleccionada);
             startActivity(intent);
         }
     }
