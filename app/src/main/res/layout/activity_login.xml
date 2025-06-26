@@ -43,7 +43,7 @@
         android:layout_marginHorizontal="32dp" />
 
     <TextView
-        android:id="@+id/tvContraseña"
+        android:id="@+id/tvContrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contraseña:"
@@ -53,13 +53,13 @@
         android:layout_marginStart="32dp" />
 
     <EditText
-        android:id="@+id/etContraseña"
+        android:id="@+id/etContrasenia"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:hint="Ingrese su contraseña"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/tvContraseña"
+        app:layout_constraintTop_toBottomOf="@id/tvContrasenia"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp" />
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
         android:onClick="iniciarSesion"
-        app:layout_constraintTop_toBottomOf="@id/etContraseña"
+        app:layout_constraintTop_toBottomOf="@id/etContrasenia"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />

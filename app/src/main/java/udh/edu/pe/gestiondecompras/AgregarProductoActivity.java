@@ -25,8 +25,7 @@ public class AgregarProductoActivity extends AppCompatActivity {
         etCantidad = findViewById(R.id.etCantidad);
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
 
-
-        String[] categorias = {"supermercado", "Limpieza", "farmacia"};
+        String[] categorias = {"Supermercado", "Limpieza", "Farmacia"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);
@@ -42,12 +41,12 @@ public class AgregarProductoActivity extends AppCompatActivity {
         } else {
             int cantidad = Integer.parseInt(cantidadStr);
 
+            // Creamos el producto y lo agregamos al repositorio
+            Producto nuevoProducto = new Producto(nombre, cantidad, imagenSeleccionada, categoriaSeleccionada);
+            ProductoRepositorio.agregarProducto(nuevoProducto);
 
+            // Redirigimos a ListaProductosActivity
             Intent intent = new Intent(this, ListaProductosActivity.class);
-            intent.putExtra("nombre", nombre);
-            intent.putExtra("cantidad", cantidad);
-            intent.putExtra("poster", imagenSeleccionada);
-            intent.putExtra("categoria", categoriaSeleccionada);
             startActivity(intent);
         }
     }

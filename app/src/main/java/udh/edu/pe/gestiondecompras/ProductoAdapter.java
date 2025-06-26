@@ -45,7 +45,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         holder.imageViewPoster.setImageDrawable(imagen);
 
 
-        holder.checkBoxAdquirido.setOnCheckedChangeListener(null); // evita efecto rebote
+        holder.checkBoxAdquirido.setOnCheckedChangeListener(null);
         holder.checkBoxAdquirido.setChecked(producto.isAdquirido());
 
         holder.checkBoxAdquirido.setOnCheckedChangeListener((buttonView, isChecked) -> {

@@ -1,6 +1,8 @@
 package udh.edu.pe.gestiondecompras;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private String nombre;
     private String correo;
     private String contrasena;

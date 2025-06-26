@@ -1,11 +1,12 @@
 package udh.edu.pe.gestiondecompras;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable  {
     private String nombre;
     private int cantidad;
     private int poster;
     private String categoria;
-
     private boolean adquirido;
 
     public Producto(String nombre, int cantidad, int poster, String categoria) {
