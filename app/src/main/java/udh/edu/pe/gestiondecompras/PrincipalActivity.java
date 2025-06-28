@@ -11,21 +11,21 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PrincipalActivity extends AppCompatActivity {
 
     private Button btnAgregarLista, btnAgregarProducto, btnListaProductos, btnListaCompras;
-    private TextView tvBienvenida;
+    private TextView tvBienvenido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        tvBienvenida = findViewById(R.id.tvBienvenida);
+        tvBienvenido = findViewById(R.id.tvBienvenida);
         btnAgregarLista = findViewById(R.id.btnAgregarLista);
         btnAgregarProducto = findViewById(R.id.btnAgregarProducto);
         btnListaProductos = findViewById(R.id.btnListaProductos);
         btnListaCompras = findViewById(R.id.btnListaCompras);
 
 
-        tvBienvenida.setText("Gestión de Listas de Compras");
+        tvBienvenido.setText("Gestión de Listas de Compras");
 
 
         btnAgregarLista.setOnClickListener(v -> {
@@ -44,7 +44,7 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
         btnListaCompras.setOnClickListener(v -> {
-            Intent intent = new Intent(this, DetalleListaActivity.class);
+            Intent intent = new Intent(this, ListaComprasActivity.class);
             startActivity(intent);
         });
     }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +38,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         holder.textViewNombre.setText(producto.getNombre());
         holder.textViewCantidad.setText("Cantidad: " + producto.getCantidad());
-        holder.textViewCategoria.setText("Categoría: " + producto.getCategoria());
 
         Drawable imagen = context.getResources().getDrawable(producto.getPoster());
         holder.imageViewPoster.setImageDrawable(imagen);
-
 
         holder.checkBoxAdquirido.setOnCheckedChangeListener(null);
         holder.checkBoxAdquirido.setChecked(producto.isAdquirido());
@@ -65,7 +62,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         ImageView imageViewPoster;
         TextView textViewNombre;
         TextView textViewCantidad;
-        TextView textViewCategoria;
         CheckBox checkBoxAdquirido;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,7 +69,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             imageViewPoster = itemView.findViewById(R.id.ivPoster);
             textViewNombre = itemView.findViewById(R.id.tvNombreProducto);
             textViewCantidad = itemView.findViewById(R.id.tvCantidad);
-            textViewCategoria = itemView.findViewById(R.id.tvCategoria);
             checkBoxAdquirido = itemView.findViewById(R.id.checkBoxAdquirido);
         }
     }

@@ -13,40 +13,47 @@ import java.util.List;
 
 public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
 
-    private List<Lista> listaCompras;
-    private Context context;
+    private final List<Lista> listas;
+    private final Context context;
 
-    public ListaAdapter(List<Lista> listaCompras, Context context) {
-        this.listaCompras = listaCompras;
+    public ListaAdapter(Context context, List<Lista> listas) {
         this.context = context;
+        this.listas = listas;
     }
 
     @NonNull
     @Override
-    public ListaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.lista_items, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View vista = LayoutInflater.from(context).inflate(R.layout.lista_items, parent, false);
+        return new ViewHolder(vista);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaAdapter.ViewHolder holder, int position) {
-        Lista item = listaCompras.get(position);
-        holder.tvNombreLista.setText(item.getNombre());
-        holder.tvFechaLista.setText("Fecha: " + item.getFecha());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Lista lista = listas.get(position);
+        holder.tvNombreLista.setText("Nombre: " + lista.getNombre());
+        holder.tvFechaLista.setText("Fecha: " + lista.getFecha());
+
+        StringBuilder productosTexto = new StringBuilder("Productos:\n");
+        for (Producto p : lista.getProductos()) {
+            productosTexto.append("- ").append(p.getNombre()).append(" x").append(p.getCantidad()).append("\n");
+        }
+        holder.tvProductos.setText(productosTexto.toString().trim());
     }
 
     @Override
     public int getItemCount() {
-        return listaCompras.size();
+        return listas.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNombreLista, tvFechaLista;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvNombreLista, tvFechaLista, tvProductos;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreLista = itemView.findViewById(R.id.tvNombreLista);
             tvFechaLista = itemView.findViewById(R.id.tvFechaLista);
+            tvProductos = itemView.findViewById(R.id.tvProductos);
         }
     }
 }

@@ -14,13 +14,13 @@
         android:theme="@style/Theme.GestionDeCompras"
         tools:targetApi="31">
         <activity
+            android:name=".ListaComprasActivity"
+            android:exported="false" />
+        <activity
             android:name=".PrincipalActivity"
             android:exported="false" />
         <activity
             android:name=".ListaProductosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetalleListaActivity"
             android:exported="false" />
         <activity
             android:name=".CategoriaActivity"

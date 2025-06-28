@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    android:padding="12dp">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvNombreLista"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre de la Lista"
+            android:text="Nombre"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvFechaLista"
+            android:text="Fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha: 01/01/2025"
-            android:textSize="16sp" />
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvProductos"
+            android:text="Productos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

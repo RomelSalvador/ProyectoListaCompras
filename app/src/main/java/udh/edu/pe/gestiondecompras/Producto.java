@@ -6,14 +6,12 @@ public class Producto implements Serializable  {
     private String nombre;
     private int cantidad;
     private int poster;
-    private String categoria;
     private boolean adquirido;
 
-    public Producto(String nombre, int cantidad, int poster, String categoria) {
+    public Producto(String nombre, int cantidad, int poster) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.poster = poster;
-        this.categoria = categoria;
         this.adquirido = false;
     }
 
@@ -39,14 +37,6 @@ public class Producto implements Serializable  {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public boolean isAdquirido() {
