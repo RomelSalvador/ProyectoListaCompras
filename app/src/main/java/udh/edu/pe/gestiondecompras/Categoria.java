@@ -27,6 +27,6 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return nombre;  //para mostrar el spinner en productos
+        return nombre;
     }
 }

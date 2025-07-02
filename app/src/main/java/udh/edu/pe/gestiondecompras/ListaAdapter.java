@@ -1,6 +1,7 @@
 package udh.edu.pe.gestiondecompras;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,20 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
         Lista lista = listas.get(position);
         holder.tvNombreLista.setText("Nombre: " + lista.getNombre());
         holder.tvFechaLista.setText("Fecha: " + lista.getFecha());
+        holder.tvCategoriaLista.setText("Categoría: " + lista.getCategoria());
 
         StringBuilder productosTexto = new StringBuilder("Productos:\n");
         for (Producto p : lista.getProductos()) {
             productosTexto.append("- ").append(p.getNombre()).append(" x").append(p.getCantidad()).append("\n");
         }
         holder.tvProductos.setText(productosTexto.toString().trim());
+
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetalleListaActivity.class);
+            intent.putExtra("lista", lista);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -47,12 +56,13 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNombreLista, tvFechaLista, tvProductos;
+        TextView tvNombreLista, tvFechaLista, tvProductos, tvCategoriaLista;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreLista = itemView.findViewById(R.id.tvNombreLista);
             tvFechaLista = itemView.findViewById(R.id.tvFechaLista);
+            tvCategoriaLista = itemView.findViewById(R.id.tvCategoriaLista);
             tvProductos = itemView.findViewById(R.id.tvProductos);
         }
     }

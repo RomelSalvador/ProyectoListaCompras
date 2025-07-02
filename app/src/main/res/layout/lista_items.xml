@@ -29,6 +29,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"/>
 
+
+        <TextView
+            android:id="@+id/tvCategoriaLista"
+            android:text="Categoría"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/black"/>
+
         <TextView
             android:id="@+id/tvProductos"
             android:text="Productos"

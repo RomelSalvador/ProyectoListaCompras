@@ -3,27 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-
-    <Spinner
-        android:id="@+id/spinnerFiltroCategoria"
+    <TextView
+        android:id="@+id/tvNombreListaDetalle"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la lista"
+        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewListas"
+        android:id="@+id/recyclerViewDetalleLista"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
-        android:contentDescription="Lista de compras registradas"
-        app:layout_constraintTop_toBottomOf="@id/spinnerFiltroCategoria"
+        android:layout_marginTop="12dp"
+        android:contentDescription="Productos de la lista"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreListaDetalle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

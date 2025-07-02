@@ -28,10 +28,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
