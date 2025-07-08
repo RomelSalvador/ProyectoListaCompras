@@ -23,7 +23,7 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAgregarProducto = findViewById(R.id.btnAgregarProducto);
         btnListaProductos = findViewById(R.id.btnListaProductos);
         btnListaCompras = findViewById(R.id.btnListaCompras);
-        btnCerrarSesion = findViewById(R.id.btnCerrarSesion); //
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
         tvBienvenido.setText("Gestión de Listas de Compras");
 

@@ -14,6 +14,7 @@ public class DetalleListaActivity extends AppCompatActivity {
     private TextView tvNombreLista;
     private RecyclerView recyclerView;
     private ProductoDetalleAdapter adapter;
+    private Lista listaSeleccionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +24,20 @@ public class DetalleListaActivity extends AppCompatActivity {
         tvNombreLista = findViewById(R.id.tvNombreListaDetalle);
         recyclerView = findViewById(R.id.recyclerViewDetalleLista);
 
-        Lista listaSeleccionada = (Lista) getIntent().getSerializableExtra("lista");
+        listaSeleccionada = (Lista) getIntent().getSerializableExtra("lista");
 
         if (listaSeleccionada != null) {
             tvNombreLista.setText("Lista: " + listaSeleccionada.getNombre());
 
             List<Producto> productos = listaSeleccionada.getProductos();
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new ProductoDetalleAdapter(productos);
+
+            adapter = new ProductoDetalleAdapter(productos, this::guardarCambiosLista);
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    private void guardarCambiosLista() {
+        ListaRepositorio.actualizarLista(listaSeleccionada);
     }
 }

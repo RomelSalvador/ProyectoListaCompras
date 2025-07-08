@@ -15,9 +15,11 @@ import java.util.List;
 public class ProductoDetalleAdapter extends RecyclerView.Adapter<ProductoDetalleAdapter.ViewHolder> {
 
     private final List<Producto> productos;
+    private final Runnable onProductoModificado;
 
-    public ProductoDetalleAdapter(List<Producto> productos) {
+    public ProductoDetalleAdapter(List<Producto> productos, Runnable onProductoModificado) {
         this.productos = productos;
+        this.onProductoModificado = onProductoModificado;
     }
 
     @NonNull
@@ -35,12 +37,12 @@ public class ProductoDetalleAdapter extends RecyclerView.Adapter<ProductoDetalle
         holder.tvCantidad.setText("Cantidad: " + producto.getCantidad());
         holder.checkBoxAdquirido.setChecked(producto.isAdquirido());
 
-        // Aplica o quita el tachado
         actualizarEstiloTexto(holder, producto.isAdquirido());
 
         holder.checkBoxAdquirido.setOnCheckedChangeListener((buttonView, isChecked) -> {
             producto.setAdquirido(isChecked);
             actualizarEstiloTexto(holder, isChecked);
+            onProductoModificado.run();
         });
     }
 
