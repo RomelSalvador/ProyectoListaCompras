@@ -57,4 +57,5 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

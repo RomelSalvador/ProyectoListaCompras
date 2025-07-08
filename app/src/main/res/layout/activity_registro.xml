@@ -8,17 +8,32 @@
     android:layout_height="match_parent"
     tools:context=".RegistroActivity">
 
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Registro"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/black"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <EditText
         android:id="@+id/resNombres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="32dp"
         android:minHeight="48dp"
         android:padding="12dp"
         android:hint="Ingrese sus Nombres"
         android:inputType="textPersonName"
         android:layout_marginHorizontal="32dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -72,6 +87,8 @@
         android:minHeight="48dp"
         android:text="Guardar"
         android:onClick="Guardar"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         android:layout_marginHorizontal="32dp"
         app:layout_constraintTop_toBottomOf="@id/resContrasenia"
         app:layout_constraintStart_toStartOf="parent"
