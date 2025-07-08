@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder> {
@@ -49,6 +51,19 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             producto.setAdquirido(isChecked);
             Toast.makeText(context, "Estado actualizado: " + producto.getNombre() +
                     (isChecked ? " (Adquirido)" : " (Pendiente)"), Toast.LENGTH_SHORT).show();
+
+            // 🔥 ACTUALIZAR EN FIRESTORE
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("productos")
+                    .whereEqualTo("nombre", producto.getNombre()) // ⚠️ Mejor usa ID en lugar de nombre
+                    .get()
+                    .addOnSuccessListener(querySnapshot -> {
+                        if (!querySnapshot.isEmpty()) {
+                            querySnapshot.getDocuments().get(0).getReference()
+                                    .update("adquirido", isChecked);
+                        }
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(context, "Error al actualizar: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
     }
 

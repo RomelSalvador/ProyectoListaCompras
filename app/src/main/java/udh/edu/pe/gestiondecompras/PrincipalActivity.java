@@ -2,7 +2,6 @@ package udh.edu.pe.gestiondecompras;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,28 +24,20 @@ public class PrincipalActivity extends AppCompatActivity {
         btnListaCompras = findViewById(R.id.btnListaCompras);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
-        tvBienvenido.setText("Gestión de Listas de Compras");
 
-        btnAgregarLista.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AgregarListaComprasActivity.class);
-            startActivity(intent);
-        });
+        Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
-        btnAgregarProducto.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AgregarProductoActivity.class);
-            startActivity(intent);
-        });
+        if (usuario != null) {
+            String nombreCompleto = usuario.getNombre() + " " + usuario.getApellido();
+            tvBienvenido.setText("Bienvenido, " + nombreCompleto);
+        } else {
+            tvBienvenido.setText("Gestión de Listas de Compras");
+        }
 
-        btnListaProductos.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ListaProductosActivity.class);
-            startActivity(intent);
-        });
-
-        btnListaCompras.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ListaComprasActivity.class);
-            startActivity(intent);
-        });
-
+        btnAgregarLista.setOnClickListener(v -> startActivity(new Intent(this, AgregarListaComprasActivity.class)));
+        btnAgregarProducto.setOnClickListener(v -> startActivity(new Intent(this, AgregarProductoActivity.class)));
+        btnListaProductos.setOnClickListener(v -> startActivity(new Intent(this, ListaProductosActivity.class)));
+        btnListaCompras.setOnClickListener(v -> startActivity(new Intent(this, ListaComprasActivity.class)));
 
         btnCerrarSesion.setOnClickListener(v -> cerrarSesion());
     }
@@ -57,5 +48,4 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }

@@ -8,9 +8,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etCorreo, etContrasenia;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
         etCorreo = findViewById(R.id.etCorreo);
         etContrasenia = findViewById(R.id.etContrasenia);
-
+        db = FirebaseFirestore.getInstance();
 
         String correo = getIntent().getStringExtra("correo_usuario");
         if (correo != null) {
@@ -28,8 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void irARegistro(View view) {
-        Intent intent = new Intent(this, RegistroActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, RegistroActivity.class));
     }
 
     public void iniciarSesion(View view) {
@@ -37,38 +40,53 @@ public class LoginActivity extends AppCompatActivity {
         String correoIngresado = etCorreo.getText().toString().trim();
         String contraseniaIngresado = etContrasenia.getText().toString().trim();
 
-        String adminCorreo = "adminstiven";
-        String contrasenia = "123456789";
-
-        if (correoIngresado.equals(adminCorreo) && contraseniaIngresado.equals(contrasenia)) {
-            Toast.makeText(this, "Inicio de sesión como administrador", Toast.LENGTH_SHORT).show();
-
-            Usuario admin = new Usuario("Administrador", "adminCorreo","contrasenia");
-
-            Intent intentLogin = new Intent(LoginActivity.this, PrincipalActivity.class);
-            intentLogin.putExtra("usuario", admin);
-            startActivity(intentLogin);
+        if (correoIngresado.isEmpty() || contraseniaIngresado.isEmpty()) {
+            Toast.makeText(this, "Ingrese correo y contraseña", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Intent intent = getIntent();
-        String correoRegistrado = intent.getStringExtra("correo");
-        String passwordRegistrada = intent.getStringExtra("password");
-        String nombreRegistrado = intent.getStringExtra("nombre");
-
-
-        if (correoIngresado.equals(correoRegistrado) && contraseniaIngresado.equals(passwordRegistrada)) {
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-            Usuario usuario = new Usuario("nombreRegistrado", "correoRegistrado",  "passwordRegistrada");
-            
-
-            Intent intentLogin = new Intent(LoginActivity.this, PrincipalActivity.class);
-            intentLogin.putExtra("usuario", usuario);
-            startActivity(intentLogin);
-        } else {
-            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+        if (correoIngresado.equals("adminstiven") && contraseniaIngresado.equals("123456789")) {
+            Usuario admin = new Usuario("Administrador", "Sin Apellido", "adminCorreo", "123456789");
+            Toast.makeText(this, "Inicio de sesión como administrador", Toast.LENGTH_SHORT).show();
+            abrirPrincipal(admin);
+            return;
         }
+
+        db.collection("usuarios")
+                .whereEqualTo("correo", correoIngresado)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    if (!querySnapshot.isEmpty()) {
+                        boolean loginExitoso = false;
+
+                        for (QueryDocumentSnapshot doc : querySnapshot) {
+                            String contrasenaDB = doc.getString("contrasena");
+                            String nombreDB = doc.getString("nombre");
+                            String apellidoDB = doc.getString("apellido");
+                            String correoDB = doc.getString("correo");
+
+                            if (contrasenaDB != null && contrasenaDB.equals(contraseniaIngresado)) {
+                                loginExitoso = true;
+                                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                                Usuario usuario = new Usuario(nombreDB, apellidoDB, correoDB, contrasenaDB);
+                                abrirPrincipal(usuario);
+                                break;
+                            }
+                        }
+
+                        if (!loginExitoso) {
+                            Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Error al consultar: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
+    private void abrirPrincipal(Usuario usuario) {
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
+    }
 }

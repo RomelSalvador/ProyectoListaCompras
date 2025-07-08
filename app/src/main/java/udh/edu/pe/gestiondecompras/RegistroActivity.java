@@ -1,60 +1,59 @@
 package udh.edu.pe.gestiondecompras;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import android.widget.Toast;
 
-import udh.edu.pe.gestiondecompras.LoginActivity;
-import udh.edu.pe.gestiondecompras.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistroActivity extends AppCompatActivity {
 
-
-    private EditText resNombres,resApellido, resCorreo, resContrasenia ;
-
-
+    private EditText resNombres, resApellido, resCorreo, resContrasenia;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registro);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-
-        });
 
         resNombres = findViewById(R.id.resNombres);
         resApellido = findViewById(R.id.resApellido);
         resCorreo = findViewById(R.id.resCorreo);
         resContrasenia = findViewById(R.id.resContrasenia);
+
+        db = FirebaseFirestore.getInstance();
     }
 
     public void Guardar(View view) {
-        String nombre = resNombres.getText().toString();
-        String apellido = resApellido.getText().toString();
-        String correo = resCorreo.getText().toString();
-        String password = resContrasenia.getText().toString();
+        String nombre = resNombres.getText().toString().trim();
+        String apellido = resApellido.getText().toString().trim();
+        String correo = resCorreo.getText().toString().trim();
+        String password = resContrasenia.getText().toString().trim();
 
+        if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Toast.makeText(this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
+        Usuario usuario = new Usuario(nombre, apellido, correo, password);
 
-        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+        db.collection("usuarios")
+                .add(usuario)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
 
-        intent.putExtra("correo", correo);
-        intent.putExtra("password", password);
-        intent.putExtra("nombre", nombre);
-        intent.putExtra("apellido", apellido);
-        startActivity(intent);
+                    // Ir a LoginActivity
+                    Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                    intent.putExtra("correo_usuario", correo);
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al registrar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
-
 }

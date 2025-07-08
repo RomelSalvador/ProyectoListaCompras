@@ -15,11 +15,13 @@ import java.util.List;
 public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
 
     private final List<Lista> listas;
+    private final List<String> listaIds; // Nuevo: lista de IDs de Firestore
     private final Context context;
 
-    public ListaAdapter(Context context, List<Lista> listas) {
+    public ListaAdapter(Context context, List<Lista> listas, List<String> listaIds) {
         this.context = context;
         this.listas = listas;
+        this.listaIds = listaIds;
     }
 
     @NonNull
@@ -42,10 +44,12 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
         }
         holder.tvProductos.setText(productosTexto.toString().trim());
 
+        String listaId = listaIds.get(position); // Tomar el id por la posición
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetalleListaActivity.class);
-            intent.putExtra("lista", lista);
+            intent.putExtra("lista", lista); // Objeto Lista
+            intent.putExtra("listaId", listaId); // ID del documento Firestore
             context.startActivity(intent);
         });
     }

@@ -4,11 +4,17 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable {
     private String nombre;
+    private String apellido;
     private String correo;
     private String contrasena;
 
-    public Usuario(String nombre, String correo, String contrasena) {
+    public Usuario() {
+
+    }
+
+    public Usuario(String nombre, String apellido, String correo, String contrasena) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.contrasena = contrasena;
     }
@@ -21,12 +27,12 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCorreo() {
@@ -35,5 +41,13 @@ public class Usuario implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

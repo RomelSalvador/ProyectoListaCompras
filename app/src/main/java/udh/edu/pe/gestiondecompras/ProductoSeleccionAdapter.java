@@ -36,9 +36,12 @@ public class ProductoSeleccionAdapter extends RecyclerView.Adapter<ProductoSelec
         Producto producto = listaProductos.get(position);
         holder.textViewNombre.setText(producto.getNombre());
 
+        // Establecer estado inicial
+        boolean seleccionado = productosSeleccionados.contains(producto);
         holder.checkBoxSeleccionado.setOnCheckedChangeListener(null);
-        holder.checkBoxSeleccionado.setChecked(productosSeleccionados.contains(producto));
+        holder.checkBoxSeleccionado.setChecked(seleccionado);
 
+        // Listener
         holder.checkBoxSeleccionado.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 if (!productosSeleccionados.contains(producto)) {
@@ -47,6 +50,7 @@ public class ProductoSeleccionAdapter extends RecyclerView.Adapter<ProductoSelec
             } else {
                 productosSeleccionados.remove(producto);
             }
+            producto.setAdquirido(isChecked); // Opcional: si quieres reflejar el estado adquirido
         });
     }
 

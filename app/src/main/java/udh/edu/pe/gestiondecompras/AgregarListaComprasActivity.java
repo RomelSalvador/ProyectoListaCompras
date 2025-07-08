@@ -7,9 +7,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,8 @@ public class AgregarListaComprasActivity extends AppCompatActivity {
     private ProductoSeleccionAdapter adapter;
     private List<Producto> productosSeleccionados = new ArrayList<>();
 
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,8 @@ public class AgregarListaComprasActivity extends AppCompatActivity {
         etFechaLista = findViewById(R.id.etFechaLista);
         spinnerCategoriaLista = findViewById(R.id.spinnerCategoriaLista);
         recyclerView = findViewById(R.id.recyclerViewSeleccionarProductos);
+
+        db = FirebaseFirestore.getInstance();
 
         String[] categorias = {"Supermercado", "Farmacia", "Limpieza"};
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
@@ -49,15 +56,20 @@ public class AgregarListaComprasActivity extends AppCompatActivity {
 
         if (nombre.isEmpty() || fecha.isEmpty() || productosSeleccionados.isEmpty()) {
             Toast.makeText(this, "Complete todos los campos y seleccione al menos un producto", Toast.LENGTH_SHORT).show();
-        } else {
-            Lista nuevaLista = new Lista(nombre, fecha, categoriaSeleccionada, new ArrayList<>(productosSeleccionados));
-            ListaRepositorio.agregarLista(nuevaLista);
-
-            Toast.makeText(this, "Lista guardada con éxito", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(this, ListaComprasActivity.class);
-            startActivity(intent);
-            finish();
+            return;
         }
+
+        Lista nuevaLista = new Lista(nombre, fecha, categoriaSeleccionada, new ArrayList<>(productosSeleccionados));
+
+        db.collection("listas_compras")
+                .add(nuevaLista)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Lista guardada con éxito", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, ListaComprasActivity.class));
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al guardar: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 }

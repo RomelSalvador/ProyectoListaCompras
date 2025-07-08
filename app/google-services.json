@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253088050889",
+    "project_id": "gestioncompras-9d641",
+    "storage_bucket": "gestioncompras-9d641.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253088050889:android:4f62d62823299ff36c6718",
+        "android_client_info": {
+          "package_name": "udh.edu.pe.gestiondecompras"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI4J19HRWZYmzb_nZRC1YKszqIJdSgDqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
