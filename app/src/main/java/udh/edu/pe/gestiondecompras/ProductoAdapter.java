@@ -55,7 +55,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             // 🔥 ACTUALIZAR EN FIRESTORE
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("productos")
-                    .whereEqualTo("nombre", producto.getNombre()) // ⚠️ Mejor usa ID en lugar de nombre
+                    .whereEqualTo("nombre", producto.getNombre()) //
                     .get()
                     .addOnSuccessListener(querySnapshot -> {
                         if (!querySnapshot.isEmpty()) {

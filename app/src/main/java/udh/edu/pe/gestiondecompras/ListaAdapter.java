@@ -15,7 +15,7 @@ import java.util.List;
 public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> {
 
     private final List<Lista> listas;
-    private final List<String> listaIds; // Nuevo: lista de IDs de Firestore
+    private final List<String> listaIds;
     private final Context context;
 
     public ListaAdapter(Context context, List<Lista> listas, List<String> listaIds) {
@@ -44,15 +44,24 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ViewHolder> 
         }
         holder.tvProductos.setText(productosTexto.toString().trim());
 
-        String listaId = listaIds.get(position); // Tomar el id por la posición
+        String listaId = listaIds.get(position);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetalleListaActivity.class);
-            intent.putExtra("lista", lista); // Objeto Lista
-            intent.putExtra("listaId", listaId); // ID del documento Firestore
+            intent.putExtra("lista", lista);
+            intent.putExtra("listaId", listaId);
             context.startActivity(intent);
         });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            Intent intent = new Intent(context, CompartirListaActivity.class);
+            intent.putExtra("lista", lista);
+            intent.putExtra("listaId", listaId);
+            context.startActivity(intent);
+            return true;
+        });
     }
+
 
     @Override
     public int getItemCount() {

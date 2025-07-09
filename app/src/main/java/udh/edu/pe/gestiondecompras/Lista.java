@@ -4,16 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Lista implements Serializable {
+
     private String id;
     private String nombre;
     private String fecha;
     private String categoria;
     private List<Producto> productos;
 
-    public Lista(){
-
+    public Lista() {
     }
-
 
     public Lista(String nombre, String fecha, String categoria, List<Producto> productos) {
         this.nombre = nombre;

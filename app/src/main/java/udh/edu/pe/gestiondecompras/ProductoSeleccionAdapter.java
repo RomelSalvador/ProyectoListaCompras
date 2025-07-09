@@ -50,7 +50,7 @@ public class ProductoSeleccionAdapter extends RecyclerView.Adapter<ProductoSelec
             } else {
                 productosSeleccionados.remove(producto);
             }
-            producto.setAdquirido(isChecked); // Opcional: si quieres reflejar el estado adquirido
+            producto.setAdquirido(isChecked);
         });
     }
 

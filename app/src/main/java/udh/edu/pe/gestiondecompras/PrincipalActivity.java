@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    private Button btnAgregarLista, btnAgregarProducto, btnListaProductos, btnListaCompras, btnCerrarSesion;
+    private Button btnAgregarLista, btnAgregarProducto, btnListaProductos, btnListaCompras, btnCompartirLista,btnVerListasCompartidas, btnCerrarSesion;
     private TextView tvBienvenido;
 
     @Override
@@ -23,7 +23,8 @@ public class PrincipalActivity extends AppCompatActivity {
         btnListaProductos = findViewById(R.id.btnListaProductos);
         btnListaCompras = findViewById(R.id.btnListaCompras);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
-
+        btnCompartirLista = findViewById(R.id.btnCompartirLista);
+        btnVerListasCompartidas = findViewById(R.id.btnVerListasCompartidas);
 
         Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
@@ -38,6 +39,8 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAgregarProducto.setOnClickListener(v -> startActivity(new Intent(this, AgregarProductoActivity.class)));
         btnListaProductos.setOnClickListener(v -> startActivity(new Intent(this, ListaProductosActivity.class)));
         btnListaCompras.setOnClickListener(v -> startActivity(new Intent(this, ListaComprasActivity.class)));
+        btnCompartirLista.setOnClickListener(v -> startActivity(new Intent(this, SeleccionarListaActivity.class)));
+        btnVerListasCompartidas.setOnClickListener(v -> startActivity(new Intent(this, ListasCompartidasActivity.class)));
 
         btnCerrarSesion.setOnClickListener(v -> cerrarSesion());
     }
